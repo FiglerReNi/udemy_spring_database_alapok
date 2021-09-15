@@ -1,16 +1,15 @@
 package com.example.database;
 
 import com.example.database.dao.PersonDao;
-import model.Person;
+import com.example.database.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @SpringBootApplication
 public class UdemySpringDatabaseAlapokApplication implements CommandLineRunner {

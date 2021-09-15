@@ -1,4 +1,4 @@
-package model;
+package com.example.database.model;
 
 import lombok.*;
 import java.time.LocalDate;
