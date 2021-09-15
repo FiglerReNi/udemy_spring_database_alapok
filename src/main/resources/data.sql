@@ -1,8 +1,8 @@
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTHDAY )
-VALUES(1,  'Ranga', 'Hyderabad',sysdate());
+VALUES(1,  'Ranga', 'Hyderabad', '1995-08-10');
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTHDAY )
-VALUES(2,  'James', 'New York',sysdate());
+VALUES(2,  'James', 'New York', '2001-10-11');
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTHDAY )
-VALUES(3,  'Pieter', 'Amsterdam',sysdate());
+VALUES(3,  'Pieter', 'Amsterdam', '2003-10-15');
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTHDAY )
-VALUES(4,  'James', 'Budapest',sysdate());
+VALUES(4,  'James', 'Budapest', '1999-10-11');

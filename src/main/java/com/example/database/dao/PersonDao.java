@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -41,6 +43,16 @@ public class PersonDao {
 
     public int deleteById(int id){
         return jdbcTemplate.update("delete from person where id = ?", id);
+    }
+
+    public int insert(Person person){
+        return jdbcTemplate.update("insert into person (id, name, location, birthday ) VALUES(?,?,?,?)",
+                person.getId(), person.getName(), person.getLocation(), person.getBirthday());
+    }
+
+    public int update(Person person){
+        return jdbcTemplate.update("update person set name = ?, location = ?, birthday = ?  where id = ? ",
+                person.getName(), person.getLocation(), person.getBirthday(), person.getId());
     }
 
 }
