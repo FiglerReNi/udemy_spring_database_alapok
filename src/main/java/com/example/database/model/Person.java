@@ -8,14 +8,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
-@NamedQuery(name = "find_all_persons", query = "select p from Person p")
 //@Table(name="person")
 public class Person {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
-    private long id;
+    private int id;
     //@Column(name="name")
     private String name;
     private String location;
