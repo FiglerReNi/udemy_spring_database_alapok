@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 
 @SpringBootApplication
-public class UdemySpringDatabaseAlapokApplication implements CommandLineRunner {
+public class UdemySpringDatabaseAlapokApplication implements CommandLineRunner{
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -31,14 +31,8 @@ public class UdemySpringDatabaseAlapokApplication implements CommandLineRunner {
     public void run(String... args) {
          logger.info("All users -> {}",  personDao.findAll());
          logger.info("User id 2 -> {}",  personDao.findById(2));
-         logger.info("User name James -> {}",  personDao.findByName("James"));
-         logger.info("User name James, location Budapest -> {}",  personDao.findByNameAndLocation("James", "Budapest"));
-         logger.info("All users -> {}",  personDao.findAllWithCustomRowMapper());
-         logger.info("User id 2 -> {}",  personDao.findByIdWithCustomRowMapper(2));
-         logger.info("User name James -> {}",  personDao.findByNameWithCustomRowMapper("James"));
-         logger.info("User name James, location Budapest -> {}",  personDao.findByNameAndLocationWithCustomRowMapper("James", "Budapest"));
-         logger.info("Deleting 1 -> Number of rows deleted  {}",  personDao.deleteById(1));
-         logger.info("Insert 5 -> Number of rows inserted  {}",  personDao.insert(new Person(5, "John", "Berlin", LocalDate.of(1990, 8, 26))));
-         logger.info("Update 2 -> Number of rows updated  {}",  personDao.update(new Person(2, "Pieter", "Köln", LocalDate.of(1993, 10, 26) )));
-    }
+         logger.info("Insert ->  {}",  personDao.updateAndInsert(new Person("John", "Berlin", LocalDate.of(1990, 8, 26))));
+         logger.info("Update 2 -> {}",  personDao.updateAndInsert(new Person(2, "Pieter", "Köln", LocalDate.of(1993, 10, 26) )));
+         personDao.deleteById(9);
+   }
 }

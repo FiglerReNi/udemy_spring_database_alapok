@@ -1,79 +1,38 @@
 package com.example.database.dao;
 
 import com.example.database.model.Person;
-import com.example.database.util.CustomRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class PersonDao {
 
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    @PersistenceContext
+    EntityManager entityManager;
 
     public List<Person> findAll(){
-       return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper<>(Person.class));
+        TypedQuery<Person> namedQuery = entityManager.createNamedQuery("find_all_persons", Person.class);
+        return namedQuery.getResultList();
     }
 
-    public List<Person> findAllWithCustomRowMapper(){
-        return jdbcTemplate.query("select * from person", CustomRowMapper.personRowMapper);
+    public Person findById(long id){
+        return entityManager.find(Person.class, id);
     }
 
-    public Person findById(int id){
-        return jdbcTemplate.queryForObject("select * from person where id = ?",
-                new BeanPropertyRowMapper<>(Person.class),
-                id);
+    public Person updateAndInsert(Person person){
+        return entityManager.merge(person);
     }
 
-    public Person findByIdWithCustomRowMapper(int id){
-        return jdbcTemplate.queryForObject("select * from person where id = ?",
-                CustomRowMapper.personRowMapper,
-                id);
+    public void deleteById(long id){
+        Person person = findById(id);
+        entityManager.remove(person);
     }
-
-    public List<Person> findByName(String name){
-        return jdbcTemplate.query("select * from person where name = ?",
-                new BeanPropertyRowMapper<>(Person.class),
-                name);
-    }
-
-    public List<Person> findByNameWithCustomRowMapper(String name){
-        return jdbcTemplate.query("select * from person where name = ?",
-                CustomRowMapper.personRowMapper,
-                name);
-    }
-
-    public Person findByNameAndLocation(String name, String location){
-        return jdbcTemplate.queryForObject("select * from person where name = ? and location = ?",
-                new BeanPropertyRowMapper<>(Person.class),
-                name, location);
-    }
-
-    public Person findByNameAndLocationWithCustomRowMapper(String name, String location){
-        return jdbcTemplate.queryForObject("select * from person where name = ? and location = ?",
-                CustomRowMapper.personRowMapper,
-                name, location);
-    }
-
-    public int deleteById(int id){
-        return jdbcTemplate.update("delete from person where id = ?", id);
-    }
-
-    public int insert(Person person){
-        return jdbcTemplate.update("insert into person (id, name, location, birthday ) VALUES(?,?,?,?)",
-                person.getId(), person.getName(), person.getLocation(), person.getBirthday());
-    }
-
-    public int update(Person person){
-        return jdbcTemplate.update("update person set name = ?, location = ?, birthday = ?  where id = ? ",
-                person.getName(), person.getLocation(), person.getBirthday(), person.getId());
-    }
-
 }
