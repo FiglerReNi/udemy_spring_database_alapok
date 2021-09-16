@@ -1,7 +1,6 @@
 package com.example.database.dao;
 
 import com.example.database.model.Person;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
