@@ -51,13 +51,13 @@ public class PersonDao {
     }
 
     public Person findByNameAndLocation(String name, String location){
-        return jdbcTemplate.queryForObject("select * from person where name = ? and location = ?",
+        return jdbcTemplate.queryForObject("select * from person where name = ? and location = ? order by id desc limit 1",
                 new BeanPropertyRowMapper<>(Person.class),
                 name, location);
     }
 
     public Person findByNameAndLocationWithCustomRowMapper(String name, String location){
-        return jdbcTemplate.queryForObject("select * from person where name = ? and location = ?",
+        return jdbcTemplate.queryForObject("select * from person where name = ? and location = ? order by id desc limit 1",
                 CustomRowMapper.personRowMapper,
                 name, location);
     }
