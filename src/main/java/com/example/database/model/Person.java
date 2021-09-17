@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @NamedQuery(name = "find_all_persons", query = "select p from Person p")
-//@Table(name="person")
+//@Table(name="persons")
 public class Person {
 
     @Id

@@ -2,9 +2,7 @@ package com.example.database.dao;
 
 import com.example.database.model.Person;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
